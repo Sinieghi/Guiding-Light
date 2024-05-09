@@ -7,11 +7,21 @@ namespace GuidingLight.Controller;
 class UserController : ControllerBase
 {
 
-    private readonly UserServices? _userService;
+    private readonly UserServices? _userService = new();
 
-    public Task<Company> GetCompanyAsync(int id)
+    // public Task<Company> GetCompanyAsync(int id)
+    // {
+    //     _userService.
+    // }
+
+    public Task<User> LoginAsync(string Email, string Password)
     {
-        _userService.
+        return _userService.LoginAsync(Email, Password);
+    }
+
+    public async Task CreateAsync(User user)
+    {
+        await _userService.CreateUserAsync(user);
     }
 
 }
