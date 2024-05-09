@@ -7,9 +7,11 @@ class User
     [Required]
     public string? Name { get; set; }
     [Required]
+    public string? Email { get; set; }
+    [Required]
     public double Password { get; set; }
     public string? Avatar { get; set; }
-    public Skills? MySkills { get; set; }
+    public List<Skills>? MySkills { get; set; }
     public List<Service>? ServicesDone { get; set; }
     public Company? MyCompany { get; set; }
 
