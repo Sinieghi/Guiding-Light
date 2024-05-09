@@ -11,5 +11,6 @@ class User
     public string? Avatar { get; set; }
     public Skills? MySkills { get; set; }
     public List<Service>? ServicesDone { get; set; }
+    public Company? MyCompany { get; set; }
 
 }
