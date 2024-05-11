@@ -7,6 +7,8 @@ class GuidingLightContext : DbContext
 {
     public DbSet<User> User { get; internal set; }
     public DbSet<Company> Company { get; internal set; }
+    public DbSet<Service> Service { get; internal set; }
+    public DbSet<OS> OS { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions)
     {
@@ -27,18 +29,36 @@ class GuidingLightContext : DbContext
             entity.HasMany(x => x.MySkills);
             entity.HasMany(x => x.ServicesDone);
             entity.HasOne(x => x.MyCompany);
+            entity.HasOne(x => x.MyRole);
         });
         modelBuilder.Entity<Company>(entity =>
         {
             entity.HasKey(x => x.Id);
             entity.Property(x => x.Name);
             entity.HasOne(x => x.Owner);
-            entity.HasMany(x => x.DDs);
-            entity.HasMany(x => x.Services);
-            entity.HasMany(x => x.PMOCs);
-            entity.HasMany(x => x.OSList);
-            entity.HasMany(x => x.WorkersRole);
-            entity.HasMany(x => x.Workers);
+        }
+        );
+        modelBuilder.Entity<Service>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.Risks);
+            entity.Property(x => x.Security);
+            entity.Property(x => x.Description);
+            entity.Property(x => x.IsDone);
+            entity.Property(x => x.DateOfService);
+            entity.Property(x => x.EPIs);
+            entity.HasOne(x => x.Client);
+            entity.HasOne(x => x.Os);
+            entity.HasOne(x => x.Company);
+        }
+        );
+        modelBuilder.Entity<OS>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.HasOne(x => x.Creator);
+            entity.HasOne(x => x.Client);
+            entity.HasOne(x => x.Company);
+            entity.HasMany(x => x.TeamSelected);
         }
         );
     }

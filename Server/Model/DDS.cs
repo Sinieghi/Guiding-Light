@@ -6,4 +6,5 @@ class DDS
     public string? Description { get; set; }
     public List<User>? Participants { get; set; }
     public DateTime Date { get; set; }
+    public Company? Company { get; set; }
 }

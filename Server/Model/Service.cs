@@ -8,8 +8,7 @@ class Service
     public User? Client { get; set; }
     [Required]
     public DateTime DateOfService { get; set; }
-    //team selected only the ones selected from the company where gona serve this service call can update
-    public List<User>? TeamSelected { get; set; }
+    public Company? Company { get; set; }
     public bool IsDone { get; set; } = false;
     //rest of this date contractor and service provider can update
     public string? Description { get; set; }
@@ -18,4 +17,5 @@ class Service
     //ex: NR 10
     public string? Security { get; set; }
     public string? Risks { get; set; }
+    public OS? Os { get; set; }
 }

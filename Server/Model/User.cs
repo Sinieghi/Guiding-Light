@@ -14,5 +14,5 @@ class User
     public List<Skills>? MySkills { get; set; }
     public List<Service>? ServicesDone { get; set; }
     public Company? MyCompany { get; set; }
-
+    public Role? MyRole { get; set; }
 }

@@ -17,10 +17,7 @@ class CompanyServices
     public async Task<Company> GetCompany(int companyRef)
     {
         var company = await _context.Company
-        .Where(x => x.Id == companyRef).Include(u => u.WorkersRole)
-        .Include(u => u.Workers).Include(u => u.DDs)
-        .Include(u => u.OSList).Include(u => u.PMOCs)
-        .Include(u => u.PMOCs).FirstOrDefaultAsync();
+        .Where(x => x.Id == companyRef).FirstOrDefaultAsync();
         if (company == null) return null;
         return company;
     }
@@ -31,10 +28,19 @@ class CompanyServices
         var owner = await _context.User.FirstOrDefaultAsync(x => x.Id == id);
         return owner;
     }
-    public async Task<List<Company>> GetWorkersAsync(int[] ids)
+    public async Task<List<User>> GetWorkersAsync(Company company)
     {
-        var workers = await _context.Company.Include(u => u.Workers).ToListAsync();
+        var user = await _context.User.AnyAsync(x => x.MyCompany == company);
+        if (user == null) return null;
+        var workers = await _context.User.Where(x => x.MyCompany == company).ToListAsync();
         return workers;
+    }
+    public async Task<List<Service>> GetServicesAsync(Company company)
+    {
+        var Has = await _context.Service.AnyAsync(x => x.Company == company);
+        if (Has == null) return null;
+        var services = await _context.Service.Where(x => x.Company == company).ToListAsync();
+        return services;
     }
 
 }

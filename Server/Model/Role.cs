@@ -7,8 +7,6 @@ class Role
     [Required]
     public string? RoleName { get; set; }
     [Required]
-    public List<User>? Users { get; set; }
-    [Required]
     public bool CanUpdate { get; set; }
     [Required]
     public bool CanCreate { get; set; }
