@@ -6,7 +6,7 @@ using Name;
 namespace GuidingLight.Services;
 class UserServices
 {
-    private readonly GuidingLightContext? _context = new();
+    private readonly GuidingLightContext? _context;
 
     public async Task CreateUserAsync(User user)
     {

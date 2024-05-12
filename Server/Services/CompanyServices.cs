@@ -17,17 +17,11 @@ class CompanyServices
     public async Task<Company> GetCompany(int companyRef)
     {
         var company = await _context.Company
-        .Where(x => x.Id == companyRef).FirstOrDefaultAsync();
+        .Where(x => x.Id == companyRef).Include(i => i.Owner).FirstOrDefaultAsync();
         if (company == null) return null;
         return company;
     }
-    public async Task<User> GetOwnerAsync(int id)
-    {
-        var user = await _context.User.AnyAsync(x => x.Id == id);
-        if (user == null) return null;
-        var owner = await _context.User.FirstOrDefaultAsync(x => x.Id == id);
-        return owner;
-    }
+    //***** Imagine if i had a map showing the current location of workers... Would be great, i guess. I can use google map API for this
     public async Task<List<User>> GetWorkersAsync(Company company)
     {
         var user = await _context.User.AnyAsync(x => x.MyCompany == company);
@@ -42,5 +36,6 @@ class CompanyServices
         var services = await _context.Service.Where(x => x.Company == company).ToListAsync();
         return services;
     }
+
 
 }

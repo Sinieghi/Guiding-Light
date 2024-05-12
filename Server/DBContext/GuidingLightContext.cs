@@ -9,6 +9,7 @@ class GuidingLightContext : DbContext
     public DbSet<Company> Company { get; internal set; }
     public DbSet<Service> Service { get; internal set; }
     public DbSet<OS> OS { get; internal set; }
+    public DbSet<PMOC> PMOC { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions)
     {
@@ -61,5 +62,12 @@ class GuidingLightContext : DbContext
             entity.HasMany(x => x.TeamSelected);
         }
         );
+        modelBuilder.Entity<PMOC>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.HasOne(x => x.Company);
+            entity.Property(x => x.FieldName);
+            entity.Property(x => x.FiledDescription);
+        });
     }
 }
