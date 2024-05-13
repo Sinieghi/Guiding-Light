@@ -7,7 +7,7 @@ namespace GuidingLight.Controller;
 class CompanyController : ControllerBase
 {
 
-    private readonly CompanyServices? _companyService;
+    private readonly CompanyServices? _companyService = new();
 
     public async Task<Company> CompanyUsers(int companyId)
     {
