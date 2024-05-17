@@ -18,4 +18,9 @@ class CompanyController : ControllerBase
         if (company == null) return;
         await _companyService.CreateCompany(company);
     }
+    public async Task UpdateCompanyAsync(Company company)
+    {
+        if (company == null) return;
+        await _companyService.UpdateCompany(company);
+    }
 }

@@ -10,6 +10,7 @@ class GuidingLightContext : DbContext
     public DbSet<Service> Service { get; internal set; }
     public DbSet<OS> OS { get; internal set; }
     public DbSet<PMOC> PMOC { get; internal set; }
+    public DbSet<Equipment> Equipment { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions)
     {
@@ -37,6 +38,15 @@ class GuidingLightContext : DbContext
             entity.HasKey(x => x.Id);
             entity.Property(x => x.Name);
             entity.HasOne(x => x.Owner);
+        }
+        );
+        modelBuilder.Entity<Equipment>(entity =>
+        {
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.Tag);
+            entity.Property(x => x.Type);
+            entity.Property(x => x.ManualPDF);
+            entity.Property(x => x.Image);
         }
         );
         modelBuilder.Entity<Service>(entity =>

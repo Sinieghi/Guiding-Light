@@ -14,6 +14,12 @@ class CompanyServices
         _context.Add(company);
         await _context.SaveChangesAsync();
     }
+    public async Task UpdateCompany(Company company)
+    {
+        var co = await _context.Company.Where(x => x.Id == company.Id).FirstOrDefaultAsync();
+        if (co != null) return;
+        _context.Update(company);
+    }
     public async Task<Company> GetCompany(int companyRef)
     {
         var company = await _context.Company
@@ -35,6 +41,12 @@ class CompanyServices
         if (Has == null) return null;
         var services = await _context.Service.Where(x => x.Company == company).ToListAsync();
         return services;
+    }
+    public async Task DisbandCompanyAsync(Company company)
+    {
+        if (company == null || _context == null) return;
+        await _context.Company
+        .Where(x => x.Id == company.Id).ExecuteDeleteAsync();
     }
 
 
