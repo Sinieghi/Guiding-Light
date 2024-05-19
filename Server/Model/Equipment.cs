@@ -9,4 +9,5 @@ class Equipment
     // public string? Location { get; set; }
     public string? Image { get; set; }
     public string? ManualPDF { get; set; }
+    public Company? CompanyRef { get; set; }
 }

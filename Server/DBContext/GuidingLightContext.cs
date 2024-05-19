@@ -47,6 +47,7 @@ class GuidingLightContext : DbContext
             entity.Property(x => x.Type);
             entity.Property(x => x.ManualPDF);
             entity.Property(x => x.Image);
+            entity.HasOne(x => x.CompanyRef);
         }
         );
         modelBuilder.Entity<Service>(entity =>
